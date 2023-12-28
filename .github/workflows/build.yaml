@@ -1,7 +1,7 @@
 name: Regression tests
 on: push
 jobs:
-  cypress-run:
+  thread-1:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -12,3 +12,17 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           commnd: npm run test_headless
+          browser: chrome
+  
+  thread-2:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          commnd: npm run test_headless
+          browser: firefox
